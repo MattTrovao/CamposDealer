@@ -1,7 +1,7 @@
 <template>
   <Page>
     <Container>
-      <h1>Olá mundo</h1>
+      <Title>Últimos Cadastrados</Title>
     </Container>
   </Page>
 </template>

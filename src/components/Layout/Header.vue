@@ -5,10 +5,10 @@
     </div>
 
     <nav class="header__navigation flex end gap-2">
-      <a href="">Home</a>
-      <a href="">Clientes</a>
-      <a href="">Produtos</a>
-      <a href="">Vendas</a>
+      <router-link to="/">Home</router-link>
+      <router-link to="/clients">Clientes</router-link>
+      <router-link to="/products">Produtos</router-link>
+      <router-link to="/sales">Vendas</router-link>
     </nav>
   </header>
 </template>
@@ -42,6 +42,11 @@
       padding: 5px $padding * 2;
       border: 1px solid transparent;
       border-radius: $radius;
+
+      &.router-link-active{
+        color: $tertiary;
+        border-color: $tertiary;
+      }
 
       &:hover{
         opacity: .6;
