@@ -1,0 +1,288 @@
+// Grid
+.grid {
+  display: grid;
+  gap: 1.2rem;
+  align-items: center;
+
+  @for $i from 2 through 12 {
+    &.c--#{$i} {
+      grid-template-columns: repeat(#{$i}, 1fr);
+    }
+
+    &.r--#{$i} {
+      row-gap: 1rem;
+      grid-template-rows: repeat(#{$i}, 1fr);
+    }
+  }
+
+  &.baseline {
+    align-items: baseline;
+  }
+
+  &.start {
+    align-items: start;
+  }
+
+  &.end {
+    align-items: end;
+  }
+
+  &.stretch {
+    &>* {
+      align-self: stretch;
+    }
+  }
+}
+
+// Flex
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+
+  &.iFlex {
+    display: inline-flex;
+  }
+
+  &.row {
+    flex-direction: row;
+  }
+
+  &.column {
+    flex-direction: column;
+  }
+
+  &.start {
+    justify-content: start;
+  }
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.between {
+    justify-content: space-between;
+  }
+
+  &.end {
+    justify-content: end;
+  }
+
+  &.around {
+    justify-content: space-around;
+  }
+
+  &.evenly {
+    justify-content: space-evenly;
+  }
+
+  &.aStretch {
+    align-items: stretch;
+  }
+
+  &.aCenter {
+    align-items: center;
+  }
+
+  &.aEnd {
+    align-items: end;
+  }
+  
+  &.aBaseline {
+    align-items: baseline;
+  }
+
+  &>* {
+    flex: 1 auto;
+  }
+}
+
+// Gap
+@for $i from 0 through 12 {
+  .gap-#{$i}{
+    gap: #{$i}#{'rem'};
+  }
+  .rowGap-#{$i}{
+    row-gap: #{$i}#{'rem'};
+  }
+  .colGap-#{$i}{
+    column-gap: #{$i}#{'rem'};
+  }
+}
+
+// Margins
+@for $i from 0 through 15 {
+  //Marigns positivas
+  .m-#{$i} {
+    margin: #{$i}#{rem};
+  }
+
+  .my-#{$i} {
+    margin-top: #{$i}#{rem};
+    margin-bottom: #{$i}#{rem};
+  }
+
+  .mx-#{$i} {
+    margin-left: #{$i}#{rem};
+    margin-right: #{$i}#{rem};
+  }
+
+  .mt-#{$i} {
+    margin-top: #{$i}#{rem};
+  }
+
+  .mr-#{$i} {
+    margin-right: #{$i}#{rem};
+  }
+
+  .mb-#{$i} {
+    margin-bottom: #{$i}#{rem};
+  }
+
+  .ml-#{$i} {
+    margin-left: #{$i}#{rem};
+  }
+
+  .hm-#{$i} {
+    margin: calc(0.5rem * $i);
+  }
+
+  .hmy-#{$i} {
+    margin-top: calc(0.5rem * $i);
+    margin-bottom: calc(0.5rem * $i);
+  }
+
+  .hmx-#{$i} {
+    margin-left: calc(0.5rem * $i);
+    margin-right: calc(0.5rem * $i);
+  }
+
+  .hmt-#{$i} {
+    margin-top: calc(0.5rem * $i);
+  }
+
+  .hmr-#{$i} {
+    margin-right: calc(0.5rem * $i);
+  }
+
+  .hmb-#{$i} {
+    margin-bottom: calc(0.5rem * $i);
+  }
+
+  .hml-#{$i} {
+    margin-left: calc(0.5rem * $i);
+  }
+
+  //Margins negativas
+  .n-m-#{$i} {
+    margin: -#{$i}#{rem};
+  }
+
+  .n-my-#{$i} {
+    margin-top: -#{$i}#{rem};
+    margin-bottom: -#{$i}#{rem};
+  }
+
+  .n-mx-#{$i} {
+    margin-left: -#{$i}#{rem};
+    margin-right: -#{$i}#{rem};
+  }
+
+  .n-mt-#{$i} {
+    margin-top: -#{$i}#{rem};
+  }
+
+  .n-mr-#{$i} {
+    margin-right: -#{$i}#{rem};
+  }
+
+  .n-mb-#{$i} {
+    margin-bottom: -#{$i}#{rem};
+  }
+
+  .n-ml-#{$i} {
+    margin-left: -#{$i}#{rem};
+  }
+
+  //Padding
+  .p-#{$i} {
+    padding: #{$i}#{rem};
+  }
+
+  .py-#{$i} {
+    padding-top: #{$i}#{rem};
+    padding-bottom: #{$i}#{rem};
+  }
+
+  .px-#{$i} {
+    padding-left: #{$i}#{rem};
+    padding-right: #{$i}#{rem};
+  }
+
+  .pt-#{$i} {
+    padding-top: #{$i}#{rem};
+  }
+
+  .pr-#{$i} {
+    padding-right: #{$i}#{rem};
+  }
+
+  .pb-#{$i} {
+    padding-bottom: #{$i}#{rem};
+  }
+
+  .pl-#{$i} {
+    padding-left: #{$i}#{rem};
+  }
+
+  .hp-#{$i} {
+    padding: calc(0.5rem * $i);
+  }
+
+  .hpy-#{$i} {
+    padding-top: calc(0.5rem * $i);
+    padding-bottom: calc(0.5rem * $i);
+  }
+
+  .hpx-#{$i} {
+    padding-left: calc(0.5rem * $i);
+    padding-right: calc(0.5rem * $i);
+  }
+
+  .hpt-#{$i} {
+    padding-top: calc(0.5rem * $i);
+  }
+
+  .hpr-#{$i} {
+    padding-right: calc(0.5rem * $i);
+  }
+
+  .hpb-#{$i} {
+    padding-bottom: calc(0.5rem * $i);
+  }
+
+  .hpl-#{$i} {
+    padding-left: calc(0.5rem * $i);
+  }
+}
+
+.mAuto {
+  margin: 0 auto;
+}
+
+.mLAuto {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.mRAuto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+// Opacidade
+@for $i from 0 through 9 {
+  .op#{$i} {
+    opacity: #{'0.'}#{$i};
+  }
+}
