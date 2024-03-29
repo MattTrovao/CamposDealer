@@ -286,3 +286,17 @@
     opacity: #{'0.'}#{$i};
   }
 }
+
+// Text Align
+.tRight {
+  text-align: right;
+}
+.tLeft {
+  text-align: left;
+}
+.tJustify {
+  text-align: justify;
+}
+.tCenter{
+  text-align: center;
+}

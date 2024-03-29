@@ -120,3 +120,32 @@ onMounted(() => {
   getProducts();
 });
 </script>
+
+<style lang="scss" scoped>
+@import '@/sass/Variables.scss';
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  border: 2px solid $primary;
+  border-radius: $radius;
+  padding: 20px;
+  
+  img{
+    width: 180px;
+    height: 180px;
+  }
+
+  .data{
+    h2{
+      margin-bottom: 20px;
+    }
+    p{
+      color: $success;
+      font-weight: 700;
+    }
+  }
+}
+</style>
