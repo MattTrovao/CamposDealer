@@ -60,3 +60,49 @@ strong {
 i {
   font-style: italic;
 }
+
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  label{
+    font-size: .8rem;
+    color: $primary;
+  }
+  input{
+    border: 1px solid $primary;
+    font-size: 1rem;
+    color: $primary;
+    border-radius: $radius;
+    padding: 10px;
+    transition: $transition;
+
+    &:hover,&:active{
+      border-color: $secondary;
+    }
+  }
+}
+
+button{
+  padding: 10px 20px;
+  border-radius: $radius;
+  cursor: pointer;
+  background: none;
+  font-size: 1rem;
+  transition: $transition;
+  border: 1px solid;
+  max-width: 200px;
+  font-weight: 700;
+
+  &.save{
+    color: $success;
+    border-color: $success;
+
+    &:hover{
+      background: $success;
+      color: $white;
+    }
+  }
+}

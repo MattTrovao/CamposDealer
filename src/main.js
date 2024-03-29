@@ -4,12 +4,9 @@ import App from './App.vue'
 
 import router from "./router";
 import axios from "axios";
-import VueSweetalert2 from "vue-sweetalert2";
-import "sweetalert2/dist/sweetalert2.min.css";
 
 const app = createApp(App);
 
-app.use(VueSweetalert2);
 app.use(router);
 
 // Imports
@@ -19,12 +16,14 @@ import Container from "@/components/Layout/Container.vue";
 import Page from "@/components/Layout/Page.vue";
 
 import Title from "@/components/Elements/Title.vue";
+import Modal from "@/components/Elements/Modal.vue";
 
 app.component("Header", Header);
 app.component("Footer", Footer);
 app.component("Container", Container);
 app.component("Page", Page);
 app.component("Title", Title);
+app.component("Modal", Modal);
 
 
 

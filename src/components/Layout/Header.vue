@@ -27,6 +27,7 @@
   padding: $padding;
   background: $white;
   border-bottom: 1px solid rgba($primary, .4);
+  z-index: 9;
 
   .header__logo{
     img{
