@@ -21,3 +21,8 @@ a {
   text-decoration: none;
   transition: $transition;
 }
+
+section,
+div {
+  position: relative;
+}

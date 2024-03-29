@@ -1,0 +1,36 @@
+.card {
+  border: 2px solid $tertiary;
+  border-radius: $radius;
+  padding: 20px;
+  position: relative;
+
+  .icon {
+    max-width: 40px;
+    max-height: 40px;
+  }
+}
+
+.product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  border: 2px solid $primary;
+  border-radius: $radius;
+  padding: 20px;
+  
+  img{
+    width: 180px;
+    height: 180px;
+  }
+
+  .data{
+    h2{
+      margin-bottom: 20px;
+    }
+    p{
+      color: $success;
+      font-weight: 700;
+    }
+  }
+}
