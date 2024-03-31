@@ -51,6 +51,7 @@ const props = defineProps({
   border: 2px solid $primary;
   border-radius: $radius;
   padding: 20px;
+  text-align: center;
 
   img {
     width: 180px;

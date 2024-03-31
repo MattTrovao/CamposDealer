@@ -45,7 +45,7 @@ export async function deleteItem(url, field) {
       Swal.fire({
         icon: "success",
         title: "Sucesso!",
-        html: `<span style="text-transform:capitalize">${url} ${field}</span> não foi deletado!`,
+        html: `<span style="text-transform:capitalize">${url} ${field}</span> não foi deletado(a)!`,
       });
     }
   })

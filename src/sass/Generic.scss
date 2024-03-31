@@ -300,3 +300,23 @@
 .tCenter{
   text-align: center;
 }
+
+// Text Colors
+.tPrimary {
+  color: $primary;
+}
+.tSecondary {
+  color: $secondary;
+}
+.tTertiary { 
+  color: $tertiary;
+}
+.tError {
+  color: $error;
+}
+.tSuccess {
+  color: $success;
+}
+.tEdit {
+  color: $edit;
+}
