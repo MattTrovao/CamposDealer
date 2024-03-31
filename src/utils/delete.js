@@ -1,6 +1,6 @@
 import Swal from "sweetalert2";
 
-export async function deleteItem(url, field, value) {
+export async function deleteItem(url, field) {
   const fieldName = field;
 
   Swal.fire({
@@ -22,7 +22,7 @@ export async function deleteItem(url, field, value) {
           Swal.fire({
             icon: "success",
             title: "Sucesso!",
-            html: `<span style="text-transform='capitalize'">${url}</span> deletado corretamente!`,
+            html: `<span style="text-transform:capitalize">${url}</span> deletado corretamente!`,
           });
 
           name.value = "";
@@ -45,7 +45,7 @@ export async function deleteItem(url, field, value) {
       Swal.fire({
         icon: "success",
         title: "Sucesso!",
-        html: `Dado não foi deletado`,
+        html: `<span style="text-transform:capitalize">${url} ${field}</span> não foi deletado!`,
       });
     }
   })

@@ -10,5 +10,6 @@
 .page {
   padding: 20px 0;
   flex: 1;
+  min-height: 80vh;
 }
 </style>

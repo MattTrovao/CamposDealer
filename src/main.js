@@ -18,12 +18,19 @@ import Page from "@/components/Layout/Page.vue";
 import Title from "@/components/Elements/Title.vue";
 import Modal from "@/components/Elements/Modal.vue";
 
+import Clients from "@/components/Cards/Clients.vue";
+import Products from "@/components/Cards/Products.vue";
+import Sales from "@/components/Cards/Sales.vue";
+
 app.component("Header", Header);
 app.component("Footer", Footer);
 app.component("Container", Container);
 app.component("Page", Page);
 app.component("Title", Title);
 app.component("Modal", Modal);
+app.component("Clients", Clients);
+app.component("Products", Products);
+app.component("Sales", Sales);
 
 
 

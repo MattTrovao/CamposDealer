@@ -32,27 +32,14 @@
 
         <div class="flex between">
           <template v-for="client in clients" :key="client.idCliente">
-            <div class="client flex aCenter">
-              <button class="delete" @click="deleteItem('cliente',idCliente,client.idCliente)">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-              </button>
-
-              <img
-                src="@/assets/user.png"
-                :alt="`Foto do Cliente ${client.nmCliente}`"
-                class="icon"
-              />
-
-              <div class="data">
-                <h2 class="name">
-                  {{ client.nmCliente }}
-                </h2>
-
-                <p class="city">
-                  {{ client.Cidade }}
-                </p>
-              </div>
-            </div>
+            <Clients :id="client.idCliente">
+              <template v-slot:Name>
+                {{ client.nmCliente }}
+              </template>
+               <template v-slot:City>
+                {{ client.Cidade }}
+              </template>
+            </Clients>
           </template>
         </div>
       </template>
@@ -68,11 +55,10 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import api from "@/utils/api";
-import { deleteItem } from "@/utils/delete"
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 
-const clients = ref("");
+const clients = ref([{"idCliente":1,"nmCliente":"Cli1","Cidade":"Cidade1"},{"idCliente":2,"nmCliente":"Cli2","Cidade":"Cidade2"},{"idCliente":3,"nmCliente":"Cli3","Cidade":"Cidade3"},{"idCliente":4,"nmCliente":"Cli4","Cidade":"Cidade4"}]);
 const name = ref("");
 const city = ref("");
 
@@ -128,18 +114,3 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
-@import '@/sass/Variables.scss';
-
-.client {
-  border: 2px solid $tertiary;
-  border-radius: $radius;
-  padding: 20px;
-  position: relative;
-
-  .icon {
-    max-width: 40px;
-    max-height: 40px;
-  }
-}
-</style>
