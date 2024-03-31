@@ -1,7 +1,9 @@
 <template>
   <Page>
     <Container>
-      <div class="flex end mb-1">
+      <div class="flex end mb-2 gap-5">
+        <Search field="Cliente (Nome ou Cidade)" v-if="clients" v-model="searchFilter" @search="handleSearch"/>
+        
         <Modal>
           <template v-slot:Btn>Novo Cliente</template>
 
@@ -31,12 +33,12 @@
         <Title>Clientes Cadastrados</Title>
 
         <div class="flex between">
-          <template v-for="client in clients" :key="client.idCliente">
+          <template v-for="client in filterData" :key="client.idCliente">
             <Clients :id="client.idCliente">
               <template v-slot:Name>
                 {{ client.nmCliente }}
               </template>
-               <template v-slot:City>
+              <template v-slot:City>
                 {{ client.Cidade }}
               </template>
             </Clients>
@@ -48,17 +50,25 @@
         <Title>Nenhum cliente cadastrado</Title>
         <p>Para adicionar um novo cliente, clique no botão acima.</p>
       </template>
+
+
     </Container>
   </Page>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import api from "@/utils/api";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
 
-const clients = ref([{"idCliente":1,"nmCliente":"Cli1","Cidade":"Cidade1"},{"idCliente":2,"nmCliente":"Cli2","Cidade":"Cidade2"},{"idCliente":3,"nmCliente":"Cli3","Cidade":"Cidade3"},{"idCliente":4,"nmCliente":"Cli4","Cidade":"Cidade4"}]);
+const clients = ref([
+  { idCliente: 1, nmCliente: "Cli1", Cidade: "Cidade1" },
+  { idCliente: 2, nmCliente: "Cli2", Cidade: "Cidade2" },
+  { idCliente: 3, nmCliente: "Cli3", Cidade: "Cidade3" },
+  { idCliente: 4, nmCliente: "Cli4", Cidade: "Cidade4" },
+]);
+
 const name = ref("");
 const city = ref("");
 
@@ -108,6 +118,25 @@ async function saveClient() {
     });
   }
 }
+
+
+const searchFilter = ref("");
+const filterData = computed(() => {
+  if (searchFilter != ''){
+    return clients.value.filter(
+      client => 
+        client.nmCliente.toLowerCase().includes(searchFilter.value) ||
+        client.Cidade.toLowerCase().includes(searchFilter.value) 
+    )
+  }
+
+  return clients.value
+})
+
+const handleSearch = (search) => {
+  searchFilter.value = search.toLowerCase()
+}
+
 
 onMounted(() => {
   getClients();

@@ -39,8 +39,7 @@ const showModal = ref(false);
 .btn {
   color: $secondary;
   border-color: $secondary;
-  margin-top: 25px;
-
+  
   &:hover {
     border-color: $hover;
     background: $hover;

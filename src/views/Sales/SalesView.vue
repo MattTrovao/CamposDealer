@@ -1,26 +1,34 @@
 <template>
   <Page>
     <Container>
-      <div class="flex end mb-1">
+      <div class="flex end mb-2 gap-5">
+        <Search field="Venda (ID da Venda, ID do Cliente, ID do Produto, Quantidade de Produtos)" v-if="sales" v-model="searchFilter" @search="handleSearch"/>
+
+
         <Modal>
           <template v-slot:Btn>Nova Venda</template>
 
           <template v-slot:Title>Adicionar Venda</template>
 
           <template v-slot:Content>
-            <div class="field">
-              <label for="">Cliente</label>
-              <select @click="getClients" v-model="clientID">
-                <option></option>
-                <template v-for="client in clients" :key="client.idCliente">
-                  <option :value="client.idCliente">
-                    {{ client.idCliente + " - " + client.nmCliente }}
-                  </option>
-                </template>
-              </select>
-            </div>
+            <div class="grid c-2 mb-2">
+              <div class="field">
+                <label for="">Cliente</label>
+                <select @click="getClients" v-model="clientID">
+                  <option></option>
+                  <template v-for="client in clients" :key="client.idCliente">
+                    <option :value="client.idCliente">
+                      {{ client.idCliente + " - " + client.nmCliente }}
+                    </option>
+                  </template>
+                </select>
+              </div>
 
-            <div class="flex mb-2">
+              <div class="field">
+                <label for="">Data da Venda</label>
+                <VueDatePicker v-model="salesDate" text-input locale="pt" />
+              </div>
+
               <div class="field">
                 <label for="">Produto</label>
                 <select
@@ -33,7 +41,10 @@
                     v-for="product in products"
                     :key="product.idProduto"
                   >
-                    <option :value="product.idProduto" :data-price="product.vlrUnitario">
+                    <option
+                      :value="product.idProduto"
+                      :data-price="product.vlrUnitario"
+                    >
                       {{ product.idProduto + " - " + product.dscProduto }}
                     </option>
                   </template>
@@ -52,11 +63,14 @@
               </div>
             </div>
 
-            <div class="flex end aCenter tRight mb-2" v-if="totalValue && quantity">
+            <div
+              class="flex end aCenter tRight mb-2"
+              v-if="totalValue && quantity"
+            >
               <p>Valor Total:</p>
               <h3 class="tSuccess m-0">
                 <small>R$</small>
-                {{totalValue * quantity}}
+                {{ totalValue * quantity }}
               </h3>
             </div>
 
@@ -71,7 +85,7 @@
         <Title>Vendas Realizadas</Title>
 
         <div class="flex">
-          <template v-for="sale in sales" :key="sale.idVenda">
+          <template v-for="sale in filterData" :key="sale.idVenda">
             <Sales
               :id="sale.idVenda"
               :qtdVenda="sale.qtdVenda"
@@ -106,11 +120,68 @@ import api from "@/utils/api";
 import { v4 as uuidv4 } from "uuid";
 import Swal from "sweetalert2";
 
-const sales = ref("");
+const sales = ref([
+  {
+    idVenda: 1,
+    dthVenda: "/Date(1711915093537)/",
+    idCliente: 1,
+    idProduto: 1,
+    qtdVenda: 5,
+    vlrUnitarioVenda: 5,
+  },
+  {
+    idVenda: 2,
+    dthVenda: "/Date(1711915093537)/",
+    idCliente: 1,
+    idProduto: 2,
+    qtdVenda: 1,
+    vlrUnitarioVenda: 10,
+  },
+  {
+    idVenda: 3,
+    dthVenda: "/Date(1711915093537)/",
+    idCliente: 1,
+    idProduto: 3,
+    qtdVenda: 1,
+    vlrUnitarioVenda: 15,
+  },
+  {
+    idVenda: 4,
+    dthVenda: "/Date(1711915093537)/",
+    idCliente: 2,
+    idProduto: 1,
+    qtdVenda: 5,
+    vlrUnitarioVenda: 5,
+  },
+  {
+    idVenda: 5,
+    dthVenda: "/Date(1711915093537)/",
+    idCliente: 2,
+    idProduto: 2,
+    qtdVenda: 1,
+    vlrUnitarioVenda: 10,
+  },
+  {
+    idVenda: 6,
+    dthVenda: "/Date(1711915093537)/",
+    idCliente: 3,
+    idProduto: 1,
+    qtdVenda: 10,
+    vlrUnitarioVenda: 6,
+  },
+  {
+    idVenda: 7,
+    dthVenda: "/Date(1711915093537)/",
+    idCliente: 3,
+    idProduto: 3,
+    qtdVenda: 2,
+    vlrUnitarioVenda: 15,
+  },
+]);
 
 const clientID = ref("");
 const productID = ref("");
-const selectProduct = ref("");
+const salesDate = ref("");
 const quantity = ref("");
 const totalValue = ref("");
 
@@ -169,19 +240,29 @@ async function getProducts() {
 
 // Calculate Total Value
 function saveProductPrice(e) {
-  console.log(e.target.selectedOptions[0].attributes[1].value);
   totalValue.value = e.target.selectedOptions[0].attributes[1].value;
 }
 
+// Search
+const searchFilter = ref("");
+const filterData = computed(() => {
+  if (searchFilter != ''){
+    return sales.value.filter(
+      sale => 
+        sale.idVenda.toString().includes(searchFilter.value) ||
+        sale.idCliente.toString().includes(searchFilter.value) ||
+        sale.idProduto.toString().includes(searchFilter.value) ||
+        sale.qtdVenda.toString().includes(searchFilter.value) 
+    )
+  }
+
+  return sales.value
+})
+const handleSearch = (search) => {
+  searchFilter.value = search.toLowerCase()
+}
+
 onMounted(() => {
-  // getSales();
+  getSales();
 });
 </script>
-
-<style lang="scss" scoped>
-@import "@/sass/Variables.scss";
-
-.total{
-  width: 30%;
-}
-</style>

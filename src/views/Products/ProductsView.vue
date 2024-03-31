@@ -1,7 +1,10 @@
 <template>
   <Page>
     <Container>
-      <div class="flex end mb-1">
+      <div class="flex end mb-2 gap-5">
+        <Search field="Produto (Nome ou Valor)" v-if="products" v-model="searchFilter" @search="handleSearch"/>
+
+
         <Modal>
           <template v-slot:Btn>Novo Produto</template>
 
@@ -31,7 +34,7 @@
         <Title>Produtos Cadastrados</Title>
 
         <div class="flex between">
-          <template v-for="product in products" :key="product.idProduto">
+          <template v-for="product in filterData" :key="product.idProduto">
             <Products :id="product.idProduto">
               <template v-slot:Name>
                 {{ product.dscProduto }}
@@ -53,7 +56,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import api from "@/utils/api";
 import Swal from "sweetalert2";
 import { v4 as uuidv4 } from "uuid";
@@ -75,7 +78,7 @@ async function getProducts() {
   }
 }
 
-async function saveClient() {
+async function saveProduct() {
   const id = uuidv4();
   try {
     let response = await api("/produto", {
@@ -107,6 +110,23 @@ async function saveClient() {
       html: `O seguinte erro ocorreu: <br/> <b>${e}</b>`,
     });
   }
+}
+
+const searchFilter = ref("");
+const filterData = computed(() => {
+  if (searchFilter != ''){
+    return products.value.filter(
+      product => 
+        product.dscProduto.toLowerCase().includes(searchFilter.value) ||
+        product.vlrUnitario.toString().includes(searchFilter.value)
+    )
+  }
+
+  return products.value
+})
+
+const handleSearch = (search) => {
+  searchFilter.value = search.toLowerCase()
 }
 
 onMounted(() => {

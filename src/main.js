@@ -5,9 +5,14 @@ import App from './App.vue'
 import router from "./router";
 import axios from "axios";
 
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
+
 const app = createApp(App);
 
 app.use(router);
+
+app.component('VueDatePicker', VueDatePicker);
 
 // Imports
 import Header from "@/components/Layout/Header.vue";
@@ -17,6 +22,7 @@ import Page from "@/components/Layout/Page.vue";
 
 import Title from "@/components/Elements/Title.vue";
 import Modal from "@/components/Elements/Modal.vue";
+import Search from "@/components/Elements/Search.vue";
 
 import Clients from "@/components/Cards/Clients.vue";
 import Products from "@/components/Cards/Products.vue";
@@ -28,6 +34,7 @@ app.component("Container", Container);
 app.component("Page", Page);
 app.component("Title", Title);
 app.component("Modal", Modal);
+app.component("Search", Search);
 app.component("Clients", Clients);
 app.component("Products", Products);
 app.component("Sales", Sales);
