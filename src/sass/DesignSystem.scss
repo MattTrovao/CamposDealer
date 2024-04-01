@@ -191,7 +191,6 @@ button {
 }
 
 @media screen and (max-width: 1280px) {
-
   body,
   html {
     font-size: 14px;
@@ -219,5 +218,9 @@ button {
 
   h6 {
     font-size: 1.2rem;
+  }
+
+  button{
+    max-width: 100%;
   }
 }

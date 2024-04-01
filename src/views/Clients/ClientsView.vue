@@ -39,7 +39,7 @@
 
         <div class="grid c-2">
           <template v-for="client in filterData" :key="client.idCliente">
-            <Clients 
+            <Clients
               :id="client.idCliente"
               :clientName="client.nmCliente"
               :clientCity="client.Cidade"
@@ -64,7 +64,6 @@ import api from "@/utils/api";
 import { idGenerator } from "@/utils/idGenerator";
 import Swal from "sweetalert2";
 import { deleteItem } from "@/utils/delete";
-
 
 const clients = ref([
   { idCliente: 1, nmCliente: "Cli1", Cidade: "Cidade1" },
@@ -106,7 +105,7 @@ async function saveClient() {
     });
   }
 
-  clients.value.push(clientData);  // Remove when use the API
+  clients.value.push(clientData); // Remove when use the API
 
   try {
     let response = await api("/cliente", clientData);
@@ -139,10 +138,10 @@ async function saveClient() {
 // Edit
 async function handleEdit(newData) {
   const clientIndex = clients.value.findIndex(
-    client => client.idCliente === newData.currentId
+    (client) => client.idCliente === newData.currentId
   );
 
-   const clientData = {
+  const clientData = {
     idCliente: newData.currentId,
     nmCliente: newData.newName,
     Cidade: newData.newCity,
@@ -185,26 +184,28 @@ const handleDelete = (data) => {
     showCancelButton: true,
     confirmButtonText: "Deletar",
     cancelButtonText: "Cancelar",
-    reverseButtons: true
+    reverseButtons: true,
   }).then(async (result) => {
     if (result.isConfirmed) {
-      clients.value = clients.value.filter(client => client.idCliente !== data);
+      clients.value = clients.value.filter(
+        (client) => client.idCliente !== data
+      );
       Swal.fire({
         icon: "success",
         title: "Sucesso!",
         html: `<span style="text-transform:capitalize">Cliente ${data}</span> deletado corretamente!`,
       });
-    }else {
+    } else {
       Swal.fire({
         icon: "success",
         title: "Sucesso!",
         html: `<span style="text-transform:capitalize">Cliente ${data}</span> não foi deletado(a)!`,
       });
     }
-  })
+  });
 
   //deleteItem('cliente',data)
-}
+};
 
 // Search
 const searchFilter = ref("");
@@ -229,3 +230,14 @@ onMounted(() => {
 });
 </script>
 
+<style lang="scss" scoped>
+@media screen and (max-width: 1280px) {
+  .flex.gap-5{
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .grid.c-2 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+</style>

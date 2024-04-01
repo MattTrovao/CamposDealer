@@ -237,3 +237,15 @@ onMounted(() => {
   getProducts();
 });
 </script>
+
+<style lang="scss" scoped>
+@media screen and (max-width: 1280px) {
+  .flex.gap-5{
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .grid.c-2 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+</style>
