@@ -28,7 +28,7 @@
         <slot name="Name"></slot>
       </h2>
       <p>
-        <small>R$</small>
+        <small>R$ </small>
         <slot name="UnitValue"></slot>
       </p>
     </div>

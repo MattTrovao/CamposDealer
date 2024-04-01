@@ -21,6 +21,7 @@ import Container from "@/components/Layout/Container.vue";
 import Page from "@/components/Layout/Page.vue";
 
 import Title from "@/components/Elements/Title.vue";
+import Subtitle from "@/components/Elements/Subtitle.vue";
 import Modal from "@/components/Elements/Modal.vue";
 import Search from "@/components/Elements/Search.vue";
 
@@ -33,6 +34,7 @@ app.component("Footer", Footer);
 app.component("Container", Container);
 app.component("Page", Page);
 app.component("Title", Title);
+app.component("Subtitle", Subtitle);
 app.component("Modal", Modal);
 app.component("Search", Search);
 app.component("Clients", Clients);

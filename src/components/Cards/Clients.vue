@@ -46,7 +46,7 @@ const props = defineProps({
 @import "@/sass/Variables.scss";
 
 .client {
-  border: 2px solid $tertiary;
+  border: 2px solid $primary;
   border-radius: $radius;
   padding: 20px;
   display: flex;
