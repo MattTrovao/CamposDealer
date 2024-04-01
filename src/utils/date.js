@@ -6,3 +6,13 @@ export const formatDate = (d) => {
 
   return date
 };
+
+export const sendDateTime = (d) => {
+  const milliseconds = d.getTime();
+  return `/Date(${milliseconds})/`;
+}
+
+export const currentDateMillisencods = () => {
+  const d = Date.now()
+  return `/Date(${d})/`
+}

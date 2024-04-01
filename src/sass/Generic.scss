@@ -114,155 +114,155 @@
 @for $i from 0 through 15 {
   //Marigns positivas
   .m-#{$i} {
-    margin: #{$i}#{rem};
+    margin: #{$i}#{rem} !important;
   }
 
   .my-#{$i} {
-    margin-top: #{$i}#{rem};
-    margin-bottom: #{$i}#{rem};
+    margin-top: #{$i}#{rem} !important;
+    margin-bottom: #{$i}#{rem} !important;
   }
 
   .mx-#{$i} {
-    margin-left: #{$i}#{rem};
-    margin-right: #{$i}#{rem};
+    margin-left: #{$i}#{rem} !important;
+    margin-right: #{$i}#{rem} !important;
   }
 
   .mt-#{$i} {
-    margin-top: #{$i}#{rem};
+    margin-top: #{$i}#{rem} !important;
   }
 
   .mr-#{$i} {
-    margin-right: #{$i}#{rem};
+    margin-right: #{$i}#{rem} !important;
   }
 
   .mb-#{$i} {
-    margin-bottom: #{$i}#{rem};
+    margin-bottom: #{$i}#{rem} !important;
   }
 
   .ml-#{$i} {
-    margin-left: #{$i}#{rem};
+    margin-left: #{$i}#{rem} !important;
   }
 
   .hm-#{$i} {
-    margin: calc(0.5rem * $i);
+    margin: calc(0.5rem * $i) !important;
   }
 
   .hmy-#{$i} {
-    margin-top: calc(0.5rem * $i);
-    margin-bottom: calc(0.5rem * $i);
+    margin-top: calc(0.5rem * $i) !important;
+    margin-bottom: calc(0.5rem * $i) !important;
   }
 
   .hmx-#{$i} {
-    margin-left: calc(0.5rem * $i);
-    margin-right: calc(0.5rem * $i);
+    margin-left: calc(0.5rem * $i) !important;
+    margin-right: calc(0.5rem * $i) !important;
   }
 
   .hmt-#{$i} {
-    margin-top: calc(0.5rem * $i);
+    margin-top: calc(0.5rem * $i) !important;
   }
 
   .hmr-#{$i} {
-    margin-right: calc(0.5rem * $i);
+    margin-right: calc(0.5rem * $i) !important;
   }
 
   .hmb-#{$i} {
-    margin-bottom: calc(0.5rem * $i);
+    margin-bottom: calc(0.5rem * $i) !important;
   }
 
   .hml-#{$i} {
-    margin-left: calc(0.5rem * $i);
+    margin-left: calc(0.5rem * $i) !important;
   }
 
   //Margins negativas
   .n-m-#{$i} {
-    margin: -#{$i}#{rem};
+    margin: -#{$i}#{rem} !important;
   }
 
   .n-my-#{$i} {
-    margin-top: -#{$i}#{rem};
-    margin-bottom: -#{$i}#{rem};
+    margin-top: -#{$i}#{rem} !important;
+    margin-bottom: -#{$i}#{rem} !important;
   }
 
   .n-mx-#{$i} {
-    margin-left: -#{$i}#{rem};
-    margin-right: -#{$i}#{rem};
+    margin-left: -#{$i}#{rem} !important;
+    margin-right: -#{$i}#{rem} !important;
   }
 
   .n-mt-#{$i} {
-    margin-top: -#{$i}#{rem};
+    margin-top: -#{$i}#{rem} !important;
   }
 
   .n-mr-#{$i} {
-    margin-right: -#{$i}#{rem};
+    margin-right: -#{$i}#{rem} !important;
   }
 
   .n-mb-#{$i} {
-    margin-bottom: -#{$i}#{rem};
+    margin-bottom: -#{$i}#{rem} !important;
   }
 
   .n-ml-#{$i} {
-    margin-left: -#{$i}#{rem};
+    margin-left: -#{$i}#{rem} !important;
   }
 
   //Padding
   .p-#{$i} {
-    padding: #{$i}#{rem};
+    padding: #{$i}#{rem} !important;
   }
 
   .py-#{$i} {
-    padding-top: #{$i}#{rem};
-    padding-bottom: #{$i}#{rem};
+    padding-top: #{$i}#{rem} !important;
+    padding-bottom: #{$i}#{rem} !important;
   }
 
   .px-#{$i} {
-    padding-left: #{$i}#{rem};
-    padding-right: #{$i}#{rem};
+    padding-left: #{$i}#{rem} !important;
+    padding-right: #{$i}#{rem} !important;
   }
 
   .pt-#{$i} {
-    padding-top: #{$i}#{rem};
+    padding-top: #{$i}#{rem} !important;
   }
 
   .pr-#{$i} {
-    padding-right: #{$i}#{rem};
+    padding-right: #{$i}#{rem} !important;
   }
 
   .pb-#{$i} {
-    padding-bottom: #{$i}#{rem};
+    padding-bottom: #{$i}#{rem} !important;
   }
 
   .pl-#{$i} {
-    padding-left: #{$i}#{rem};
+    padding-left: #{$i}#{rem} !important;
   }
 
   .hp-#{$i} {
-    padding: calc(0.5rem * $i);
+    padding: calc(0.5rem * $i) !important;
   }
 
   .hpy-#{$i} {
-    padding-top: calc(0.5rem * $i);
-    padding-bottom: calc(0.5rem * $i);
+    padding-top: calc(0.5rem * $i) !important;
+    padding-bottom: calc(0.5rem * $i) !important;
   }
 
   .hpx-#{$i} {
-    padding-left: calc(0.5rem * $i);
-    padding-right: calc(0.5rem * $i);
+    padding-left: calc(0.5rem * $i) !important;
+    padding-right: calc(0.5rem * $i) !important;
   }
 
   .hpt-#{$i} {
-    padding-top: calc(0.5rem * $i);
+    padding-top: calc(0.5rem * $i) !important;
   }
 
   .hpr-#{$i} {
-    padding-right: calc(0.5rem * $i);
+    padding-right: calc(0.5rem * $i) !important;
   }
 
   .hpb-#{$i} {
-    padding-bottom: calc(0.5rem * $i);
+    padding-bottom: calc(0.5rem * $i) !important;
   }
 
   .hpl-#{$i} {
-    padding-left: calc(0.5rem * $i);
+    padding-left: calc(0.5rem * $i) !important;
   }
 }
 

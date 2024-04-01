@@ -2,8 +2,12 @@
   <Page>
     <Container>
       <div class="flex end mb-2 gap-5">
-        <Search field="Venda (ID da Venda, ID do Cliente, ID do Produto, Quantidade de Produtos)" v-if="sales" v-model="searchFilter" @search="handleSearch"/>
-
+        <Search
+          field="Venda (ID da Venda, ID do Cliente, ID do Produto, Quantidade de Produtos)"
+          v-if="sales"
+          v-model="searchFilter"
+          @search="handleSearch"
+        />
 
         <Modal>
           <template v-slot:Btn>Nova Venda</template>
@@ -13,9 +17,8 @@
           <template v-slot:Content>
             <div class="grid c-2 mb-2">
               <div class="field">
-                <label for="">Cliente</label>
-                <select @click="getClients" v-model="clientID">
-                  <option></option>
+                <label for="">Cliente <span class="tError">*</span></label>
+                <select @click="getClients" v-model="clientID" required>
                   <template v-for="client in clients" :key="client.idCliente">
                     <option :value="client.idCliente">
                       {{ client.idCliente + " - " + client.nmCliente }}
@@ -26,17 +29,17 @@
 
               <div class="field">
                 <label for="">Data da Venda</label>
-                <VueDatePicker v-model="salesDate" text-input locale="pt" />
+                <VueDatePicker v-model="salesDate" text-input locale="pt" hide-input-icon />
               </div>
 
               <div class="field">
-                <label for="">Produto</label>
+                <label for="">Produto <span class="tError">*</span></label>
                 <select
                   @click="getProducts"
                   @change="saveProductPrice"
                   v-model="productID"
+                  required
                 >
-                  <option></option>
                   <template
                     v-for="product in products"
                     :key="product.idProduto"
@@ -52,13 +55,14 @@
               </div>
 
               <div class="field">
-                <label for="">Quantidade</label>
+                <label for="">Quantidade <span class="tError">*</span></label>
                 <input
                   type="number"
                   v-model="quantity"
                   min="1"
                   step="1"
                   pattern="[0-9]"
+                  required
                 />
               </div>
             </div>
@@ -75,7 +79,7 @@
             </div>
 
             <div class="flex end">
-              <button class="save" @click="saveProduct()">Salvar</button>
+              <button class="saveData" @click="saveSale()">Salvar</button>
             </div>
           </template>
         </Modal>
@@ -85,21 +89,19 @@
         <Title>Vendas Realizadas</Title>
 
         <div class="flex">
-          <template v-for="sale in filterData" :key="sale.idVenda">
+          <template v-for="sale in filterData.reverse()" :key="sale.idVenda">
             <Sales
               :id="sale.idVenda"
               :qtdVenda="sale.qtdVenda"
               :vlrUnitarioVenda="sale.vlrUnitarioVenda"
+              :idClient="sale.idCliente"
+              :idProduto="sale.idProduto"
+              :dateSale="formatDate(sale.dthVenda)"
+              :clients="clients"
+              :products="products"
+              @editSale="handleEdit"
+              @deleteSale="handleDelete"
             >
-              <template v-slot:SalesId>
-                {{ sale.idVenda }}
-              </template>
-              <template v-slot:Date>
-                {{ formatDate(sale.dthVenda) }}
-              </template>
-              <template v-slot:ClientId>
-                {{ sale.idCliente }}
-              </template>
             </Sales>
           </template>
         </div>
@@ -115,10 +117,11 @@
 
 <script setup>
 import { onMounted, ref, computed } from "vue";
-import { formatDate } from "@/utils/date";
+import { formatDate, sendDateTime, currentDateMillisencods } from "@/utils/date";
 import api from "@/utils/api";
-import { v4 as uuidv4 } from "uuid";
+import { idGenerator } from "@/utils/idGenerator";
 import Swal from "sweetalert2";
+import { deleteItem } from "@/utils/delete"
 
 const sales = ref([
   {
@@ -198,6 +201,62 @@ async function getSales() {
   }
 }
 
+async function saveSale() {
+  const id = idGenerator();
+
+  const data = salesDate.value ? sendDateTime(salesDate.value) : currentDateMillisencods()  
+
+  const saleData = {
+    idVenda: id,
+    idCliente: parseInt(clientID.value),
+    dthVenda: data,
+    idProduto: parseInt(productID.value),
+    qtdVenda: parseInt(quantity.value),
+    vlrUnitarioVenda: parseInt(totalValue.value),
+  };
+
+
+  if (clientID.value == "" || productID.value == "" || quantity.value == "") {
+    return Swal.fire({
+      icon: "error",
+      title: "Erro",
+      html: `Um ou mais campos necessários não foram preenchidos!`,
+    });
+  }
+
+  sales.value.push(saleData); // Remove when use the API
+
+  try {
+    let response = await api("/venda", saleData);
+
+    if (response.data) {
+      Swal.fire({
+        icon: "success",
+        title: "Sucesso!",
+        html: `Venda cadastrada corretamente!`,
+      });
+
+      idCliente.value = "";
+      dthVenda.value = "";
+      idProduto.value = "";
+      qtdVenda.value = "";
+      vlrUnitarioVenda = "";
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        html: `O seguinte erro ocorreu: <br/> <b>${response.data}</b>`,
+      });
+    }
+  } catch (e) {
+    Swal.fire({
+      icon: "error",
+      title: "Erro",
+      html: `O seguinte erro ocorreu: <br/> <b>${e}</b>`,
+    });
+  }
+}
+
 // Get Client List
 const clients = ref([
   { idCliente: 1, nmCliente: "Cli1", Cidade: "Cidade1" },
@@ -243,24 +302,99 @@ function saveProductPrice(e) {
   totalValue.value = e.target.selectedOptions[0].attributes[1].value;
 }
 
+// Edit 
+async function handleEdit(newData) {
+
+  const saleIndex = sales.value.findIndex(
+    sale => sale.idVenda === newData.idVenda
+  );
+
+   const saleData = {
+    idVenda: newData.idVenda,
+    dthVenda:newData.dthVenda,
+    idCliente: newData.idCliente,
+    idProduto: newData.idProduto,
+    qtdVenda: newData.qtdVenda,
+    vlrUnitarioVenda: newData.vlrUnitarioVenda,
+  };
+
+  Object.assign(sales.value[saleIndex], saleData);
+
+  try {
+    let response = await api("/venda", saleData);
+
+    if (response.data) {
+      Swal.fire({
+        icon: "success",
+        title: "Sucesso!",
+        html: `Venda salva corretamente!`,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Erro",
+        html: `O seguinte erro ocorreu: <br/> <b>${response.data}</b>`,
+      });
+    }
+  } catch (e) {
+    Swal.fire({
+      icon: "error",
+      title: "Erro",
+      html: `O seguinte erro ocorreu: <br/> <b>${e}</b>`,
+    });
+  }
+}
+
+// Delete
+const handleDelete = (data) => {
+  // Deixar apenas a função deleteItem com a API
+  Swal.fire({
+    icon: "warning",
+    title: "Atenção!",
+    text: `Você realmente quer deletar essa venda?`,
+    showCancelButton: true,
+    confirmButtonText: "Deletar",
+    cancelButtonText: "Cancelar",
+    reverseButtons: true
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      sales.value = sales.value.filter(sale => sale.idVenda !== data);
+      Swal.fire({
+        icon: "success",
+        title: "Sucesso!",
+        html: `<span style="text-transform:capitalize">venda ${data}</span> deletado corretamente!`,
+      });
+      
+    }else {
+      Swal.fire({
+        icon: "success",
+        title: "Sucesso!",
+        html: `<span style="text-transform:capitalize">venda ${data}</span> não foi deletado(a)!`,
+      });
+    }
+  })
+
+  //deleteItem('produto',data)
+}
+
 // Search
 const searchFilter = ref("");
 const filterData = computed(() => {
-  if (searchFilter != ''){
+  if (searchFilter != "") {
     return sales.value.filter(
-      sale => 
+      (sale) =>
         sale.idVenda.toString().includes(searchFilter.value) ||
         sale.idCliente.toString().includes(searchFilter.value) ||
         sale.idProduto.toString().includes(searchFilter.value) ||
-        sale.qtdVenda.toString().includes(searchFilter.value) 
-    )
+        sale.qtdVenda.toString().includes(searchFilter.value)
+    );
   }
 
-  return sales.value
-})
+  return sales.value;
+});
 const handleSearch = (search) => {
-  searchFilter.value = search.toLowerCase()
-}
+  searchFilter.value = search.toLowerCase();
+};
 
 onMounted(() => {
   getSales();

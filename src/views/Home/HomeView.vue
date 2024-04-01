@@ -9,25 +9,27 @@
         v-for="(client, index) in clients.reverse()"
         :key="client.idCliente"
       >
-        <Clients :id="client.idCliente" v-if="index === 0">
-          <template v-slot:Name>
-            {{ client.nmCliente }}
-          </template>
-          <template v-slot:City>
-            {{ client.Cidade }}
-          </template>
-        </Clients>
+        <Clients
+          v-if="index === 0"
+          :id="client.idCliente"
+          :actions="false"
+          :clientName="client.nmCliente"
+          :clientCity="client.Cidade"
+        />
       </template>
 
       <Subtitle>Produto</Subtitle>
-      <template v-for="(product, index) in products.reverse()" :key="product.idProduto">
-        <Products :id="product.idProduto" v-if="index === 0">
-          <template v-slot:Name>
-            {{ product.dscProduto }}
-          </template>
-          <template v-slot:UnitValue>
-            {{ product.vlrUnitario }}
-          </template>
+      <template
+        v-for="(product, index) in products.reverse()"
+        :key="product.idProduto"
+      >
+        <Products
+          :id="product.idProduto"
+          :actions="false"
+          :desc="product.dscProduto"
+          :unit="product.vlrUnitario"
+          v-if="index === 0"
+        >
         </Products>
       </template>
 
@@ -37,6 +39,7 @@
           :id="sale.idVenda"
           :qtdVenda="sale.qtdVenda"
           :vlrUnitarioVenda="sale.vlrUnitarioVenda"
+          :actions="false"
           v-if="index === 0"
         >
           <template v-slot:SalesId>
@@ -59,7 +62,6 @@ import { onMounted, ref, computed } from "vue";
 import api from "@/utils/api";
 import Swal from "sweetalert2";
 import { formatDate } from "@/utils/date";
-
 
 // Clients
 const clients = ref([
