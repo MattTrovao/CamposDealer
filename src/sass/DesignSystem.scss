@@ -66,17 +66,19 @@ i {
 }
 
 
-.field{
+.field {
   display: flex;
   flex-direction: column;
   gap: .5rem;
   margin-bottom: 20px;
 
-  label{
+  label {
     font-size: .8rem;
     color: $primary;
   }
-  input, select{
+
+  input,
+  select {
     border: 1px solid $primary;
     background: none;
     font-size: 1rem;
@@ -85,13 +87,14 @@ i {
     padding: 10px;
     transition: $transition;
 
-    &:hover,&:active{
+    &:hover,
+    &:active {
       border-color: $secondary;
     }
   }
 }
 
-button{
+button {
   padding: 10px;
   border-radius: $radius;
   cursor: pointer;
@@ -102,26 +105,26 @@ button{
   max-width: 200px;
   font-weight: 700;
 
-  svg{
+  svg {
     width: 1rem;
     height: 1rem;
   }
 
-  &.saveData{
+  &.saveData {
     color: $success;
     border-color: $success;
 
-    &:hover{
+    &:hover {
       background: $success;
       color: $white;
     }
 
-    svg{
+    svg {
       fill: $success;
     }
   }
 
-  &.save{
+  &.save {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -129,20 +132,21 @@ button{
     color: $success;
     border-color: $success;
 
-    &:hover{
+    &:hover {
       background: $success;
-      svg{
+
+      svg {
         fill: $white;
       }
     }
 
-    svg{
+    svg {
       fill: $success;
     }
   }
-  
 
-  &.delete{
+
+  &.delete {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -150,20 +154,20 @@ button{
     z-index: 8;
     background: $white;
 
-    &:hover{
+    &:hover {
       background: $error;
 
-      svg{
+      svg {
         fill: $white;
       }
     }
 
-    svg{
+    svg {
       fill: $error;
     }
   }
 
-  &.edit{
+  &.edit {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -172,16 +176,48 @@ button{
     background: $white;
 
 
-    &:hover{
+    &:hover {
       background: $edit;
 
-      svg{
+      svg {
         fill: $white;
       }
     }
 
-    svg{
+    svg {
       fill: $edit;
     }
+  }
+}
+
+@media screen and (max-width: 1280px) {
+
+  body,
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+  }
+
+  h4 {
+    font-size: 1.6rem;
+  }
+
+  h5 {
+    font-size: 1.4rem;
+  }
+
+  h6 {
+    font-size: 1.2rem;
   }
 }

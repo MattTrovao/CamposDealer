@@ -39,19 +39,14 @@
           :id="sale.idVenda"
           :qtdVenda="sale.qtdVenda"
           :vlrUnitarioVenda="sale.vlrUnitarioVenda"
+          :idClient="sale.idCliente"
+          :idProduto="sale.idProduto"
+          :dateSale="formatDate(sale.dthVenda)"
+          :clients="clients"
+          :products="products"
           :actions="false"
           v-if="index === 0"
-        >
-          <template v-slot:SalesId>
-            {{ sale.idVenda }}
-          </template>
-          <template v-slot:Date>
-            {{ formatDate(sale.dthVenda) }}
-          </template>
-          <template v-slot:ClientId>
-            {{ sale.idCliente }}
-          </template>
-        </Sales>
+        />
       </template>
     </Container>
   </Page>
